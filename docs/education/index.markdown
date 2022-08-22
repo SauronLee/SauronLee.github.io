@@ -1,0 +1,19 @@
+---
+layout: default
+title: Coursework
+parent: Education
+---
+
+## Education
+
+### Shizuoka Institute of Science and Technology Coursework  
+
+- Optimization Theory (S)
+- Mathematical Science (A)
+- Data Science Theory (S)
+- Artificial Intelligence Theory (A)
+- Data Mining Theory (A)
+- Network System Theory (S)
+- Communication Theory (S)
+- Environmental Studies (S)
+- Academic Writing
