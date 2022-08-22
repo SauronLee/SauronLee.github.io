@@ -2,6 +2,7 @@
 layout: default
 title: Coursework
 parent: Education
+nav_order: 1
 ---
 
 ## Education

@@ -2,7 +2,7 @@
 layout: page
 title: Documents (C.V., Resume)
 permalink: /documents/
-nav_order: 7
+nav_order: 8
 ---
 
 ## Resume
