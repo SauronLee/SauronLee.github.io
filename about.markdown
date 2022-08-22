@@ -1,18 +1,14 @@
 ---
 layout: page
-title: About
+title: Home
 permalink: /about/
+nav_order: 1
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
-
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+|-------------|------------|
+| ![sauron_logo](../images/me.png) | **<font size=5>Xiaoran Li (李笑然)</font>** <br> Graduate student at Shizuoka Institute of Science and Technology <br> <br> Research interests include Sememe Knowledge Base Construction, Graph Neural Networks (Text Classification), Knowledge Graph Construction, Text Style Transfer (in Japanese), Conversational Recommender Systems (generative) <br><br> [Google Scholar](https://scholar.google.com/citations?user=gRzyFp4AAAAJ&hl=en)|
 
 
-[jekyll-organization]: https://github.com/jekyll
+<script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=000000&w=600&t=tt&d=hDGijGM-VztK5wafWGPtknXMU2sxCFxdJCQ3H23juwo&co=ffffff'></script>
+
