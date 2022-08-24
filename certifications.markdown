@@ -12,7 +12,6 @@ nav_order: 6
 
 <br>
 
-
  ![deeplearningai](../images/deeplearningai.png)
  
 <br>
