@@ -13,7 +13,8 @@ nav_order: 2
     - Authors: **Xiaoran Li**; Toshiaki Takano
     - Venue: Special Interest Group on Spoken Language Understanding and Dialogue Processing (SIG-SLUD) 95th  
     - Links: soon
-    - Code: [github](https://github.com/SauronLee/Finding-NLP-Papers)
+    - Code: [Github](https://github.com/SauronLee/Finding-NLP-Papers)
+    - BibTeX: [Google Scholar]()
 
 <br>
 
@@ -21,7 +22,8 @@ nav_order: 2
     - Authors: **Xiaoran Li**; Toshiaki Takano  
     - Venue: Japanese Society for Artificial Intelligence (JSAI) 36th  
     - Links: [[PDF] from jst.go.jp](https://www.jstage.jst.go.jp/article/pjsai/JSAI2022/0/JSAI2022_2A6GS604/_pdf)  
-    - Code: [github](https://github.com/SauronLee/SKB-STC)
+    - Code: [Github](https://github.com/SauronLee/SKB-STC)
+    - BibTeX: [Google Scholar](https://scholar.googleusercontent.com/scholar.bib?q=info:oKY4_0qLOZkJ:scholar.google.com/&output=citation&scisdr=CgX_7cu-ENWDppJLlMs:AAGBfm0AAAAAYwdNjMsfDJhY7j6ffYx3bHWAADaIR3ls&scisig=AAGBfm0AAAAAYwdNjD3liggstX3Nys9pX83WhczHAqJ2&scisf=4&ct=citation&cd=-1&hl=en)
 
 <br>
 
@@ -31,6 +33,7 @@ nav_order: 2
     - Venue: The Association for Natural Language Processing (ANLP) 28th  
     - Links: [[PDF] from anlp.jp](https://www.anlp.jp/proceedings/annual_meeting/2022/pdf_dir/A7-4.pdf)  
     - Code: [github](https://github.com/SauronLee/SKB-DA)
+    - BibTeX: [Google Scholar](https://scholar.googleusercontent.com/scholar.bib?q=info:xq-TFuEZ6XUJ:scholar.google.com/&output=citation&scisdr=CgX_7cu-ENWDppJJx7Y:AAGBfm0AAAAAYwdP37YieXDz6K8ExLlIJpaHbE--_SVs&scisig=AAGBfm0AAAAAYwdP39ZNs-OABlgF9G_vovduVjte5JpD&scisf=4&ct=citation&cd=-1&hl=en)
 
 <br>
 
@@ -39,7 +42,8 @@ nav_order: 2
     - Authors: **Xiaoran Li**; Toshiaki Takano
     - Venue: Special Interest Group on Spoken Language Understanding and Dialogue Processing (SIG-SLUD) 92th  
     - Links: [[PDF] from arXiv.org](http://arxiv.org/abs/2208.05462)  
-    - Code: soon
+    - Code: soon!
+    - BibTeX: [Google Scholar](https://scholar.googleusercontent.com/scholar.bib?q=info:5HWf8-j0W1YJ:scholar.google.com/&output=citation&scisdr=CgX_7cu-ENWDppJWdCg:AAGBfm0AAAAAYwdQbCitOJXwPEO99Kxp294hME8H6vZP&scisig=AAGBfm0AAAAAYwdQbDoaOyihCaTUGYW29kv_Cit472l_&scisf=4&ct=citation&cd=-1&hl=en)
 
 <br>
 
