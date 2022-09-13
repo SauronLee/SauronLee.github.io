@@ -18,4 +18,4 @@ nav_exclude: true
 - Network System Theory (S)
 - Communication Theory (S)
 - Environmental Studies (S)
-- Academic Writing
+- Academic Writing (A)
