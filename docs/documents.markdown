@@ -8,4 +8,5 @@ nav_order: 8
 
 <br>
 
-- Resume for CS (1 page) [Updated: Aug 23 2022]
+###  Looking for Summer 2022 Internship 
+- [Resume for CS (1 page)](../images/cv_li.pdf) [Updated: Aug 23 2022]
