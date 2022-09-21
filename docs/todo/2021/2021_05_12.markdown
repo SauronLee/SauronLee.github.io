@@ -1,0 +1,74 @@
+---
+layout: default
+title: May 12
+parent: 2021
+grand_parent: Progress Report
+---
+
+```txt
+05/12 進捗報告　Xiaoran Li
+
+[研究テーマ]
+多言語融合による教師なし意義素学習
+
+[現在の目標]
+（１）授業（コミュニケーション論 - RG Mcnabb）の発表について。
+	次の内容に関する文献を読み、スライドを作成します：
+		- カナダ太平洋鉄道（Pacific Railway）の建設
+		- カナディアン鉄道の近代史
+		- 米国の最初の大陸横断鉄道（First transcontinental railroad）の建設
+		- アメリカの鉄道の近代史
+	
+（２）自分の研究について、プログラミングを作成。
+	先週の発表を振り返し：
+		- アルゴリズムは主に3部分がある、attention_layer + encoding_layer + clustering_layer(AP) + decoding_layerの構築である。
+		- Loss function: lambda*clustering_Loss + (1-lambda)*auto_encoding_Loss(SGD)
+		
+
+
+[今週の実施内容]
+(4/29) 木曜日 ： 機械学習ビデオを見る（内容は想像より簡単ですので（最適化の基礎）、取り急ぎ）
+(4/30) 金曜日 ： 同上
+(5/01) 土曜日 ： 同上
+(5/02) 日曜日 ： 浜松に1日（ビザ更新）
+(5/03) 月曜日 ： 同上
+(5/04) 火曜日 ： 目標（１）に関する知識を読む
+(5/05) 水曜日 ： 同上
+(5/06) 木曜日 ： 浜松に1日（ビザ更新）
+(5/07) 金曜日 ： 同上
+(5/08) 土曜日 ： 目標（１）に関するスライドを作成する
+(5/09) 日曜日 ： 同上
+(5/10) 月曜日 ： 研究を続ける、プログラミングを作成
+(5/11) 火曜日 ： 同上
+	
+
+[今回の実績]
+感想：
+（１）車輪の再発明（Reinventing the wheel）は禁止。
+	- それしないとたくさん時間がかかるし、結果には良い根拠がない、無駄の仕事です。だから自身の研究に関する論文の再現(自分が元の論文のプログラミングを再構築して、元の論文の結果と同じにして)は非常に重要です。もし関する論文がいなればもっと探してください、（ぴったりじゃない、問題を転換して、考え方を転換して、必ずある）
+
+（２）attention_layerとencoding_layerが合併可能です：
+	attentionの役割は、言葉の多意味を学習できる。クラスタリング空間の観点から、attention後の意味空間と元の単語ベクトル意味空間の違いは、attention後の意味空間が単語の最小意味単位をよりよくクラスター化できますことです。 この問題は、感情分析タスクと一致しています。もっと成熟した感情分析タスクを使用して、attention_layerを置き換えることができます。（attentionと比べて感情分析タスクほうがtf-idfを使って直接にニューラルネットワークに入って、良い分類効果を出れます）
+
+（３）自分の論文量を増やして欲しい
+
+（４）カナダとアメリカの鉄道の歴史の理解，予想時間と違うのに時間がかかりすぎました。
+	興味があれば：（スライドURL）
+		https://drive.google.com/file/d/15ZBVGgxRR3S_gTj51D8VM-dxjnMitRY_/view?usp=sharing
+
+（５）ゴールデンウィークの間にバイトといろいろ事情があるので、効率が良くないからごめんなさい、もっと頑張らなきゃ。
+
+
+[参考文献]
+
+目標(1)向け：
+（１）Deregulation of and mergers among American and Canadian railroads: A study of four decades
+（２）Before the Railroad: From Slavery to Freedom in the Canadian-American Borderland
+目標(2)向け：
+（３）A Survey of Clustering With Deep Learning: From the Perspective of Network Architecture
+（４）Clustering with Deep Learning: Taxonomy and New Methods
+
+
+[次回の目標]
+研究を続ける、プログラミングを作成
+```

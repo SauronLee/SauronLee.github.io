@@ -1,0 +1,62 @@
+---
+layout: default
+title: Dec 24
+parent: 2021
+grand_parent: Progress Report
+---
+
+```txt
+12/24 進捗報告　Xiaoran Li
+
+[研究テーマ(1)]
+「意義素構築に関する研究」- 自然言語処理学会年度大会
+
+    Title:「A Data Augmentation Method for Building Sememe 
+		Knowledge Base via Reconstructing Word Definition」
+
+	- 申込受付締切と論文原稿締切 2022年 1月14日（金）午後3時
+	- 本会議 2022年3月14日（火）~3月17日（木）
+
+[研究テーマ(2)]
+「意義素のテキスト分類に関する研究」- 人工知能学会年度大会
+
+    Title:「Short Text Classification Using Graph Neural
+		 Networks via Building Sememe-relationships」(仮)
+
+	- 申込受付 2021年12月24日(金)～2022年1月21日(金)14:00
+	- 原稿提出期間 2022年2月15日(火)～3月3日(木)14:00
+	- 採択通知 2022年3月25日(金)
+	- 本会議 2022年6月14日（火）～17日（金）
+
+
+[現在の目標]
+	研究テーマ(2)
+	- アルゴリズムを構築する　--最中
+	- プログラミングを構築する　--未だ
+ 	- 実験を繰り返す --未だ
+	- 論文を書く --未だ
+
+
+[今週の実施内容]
+(12/18) 土曜日 ：
+(12/19) 日曜日 ：
+(12/20) 月曜日 ：論文を書く（3時間）
+(12/21) 火曜日 ：論文を書く（6時間）
+(12/22) 水曜日 ：論文を読む（3時間）
+(12/23) 木曜日 ：論文を読む（4時間）
+
+[今回の実績]
+特にない
+
+[参考文献]
+Structural Neural Encoders for AMR-to-text Generation
+	- https://arxiv.org/abs/1903.11410
+Translate, then Parse! A Strong Baseline for Cross-Lingual AMR Parsing
+	- https://aclanthology.org/2021.iwpt-1.6/
+
+
+
+[次回の目標]
+続き
+
+```

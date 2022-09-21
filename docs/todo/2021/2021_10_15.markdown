@@ -1,0 +1,71 @@
+---
+layout: default
+title: Oct 15
+parent: 2021
+grand_parent: Progress Report
+---
+
+```txt
+10/15 進捗報告　Xiaoran Li
+
+[研究テーマ]
+「意義素構築に関する研究」NLP年度大会（12月14日〆）
+
+[現在の目標]
+　NERを使って意義素Graphを構築すると考える
+
+[今週の実施内容]
+(10/09) 土曜日 ：バイト
+(10/10) 日曜日 ：バイト
+(10/11) 月曜日 ：バイト＋論文を読む（7時間）
+(10/12) 火曜日 ：論文を読む（7時間）
+(10/13) 水曜日 ：論文を読む（7時間）
+(10/14) 木曜日 ：論文を読む（7時間）
+
+[今回の実績]
+
+1)日本語と英語のNERで語法を抽出する：(data: JparacrawlとAspec)
+
+	例（parallel data):
+		日本語: ナノテクノロジーの応用として，情報技術・電子分野では，次世代半導体，高密度情報記録技術，超小型集積回路素子，カーボンナノチューブを用いた省電力ディスプレイなどが期待できる。
+		英語: In information technology and electron field, the application of nanotechnology to next generation semiconductors, high-density information record technology, miniature integrated circuit elements, electric power saving displays using carbon nano-tube, etc. can be expected.
+
+	語法を抽出した結果(N:固有表現-Named Entity):
+		日本語: NのNとしてN・Nでは，N，N，N，Nを用いたNなどが期待できる
+		英語: In N and N ,the N of N to N,N-N,N integrated N, N using N-N , etc. can be expected
+
+2)類似論文(1,2,3)を探しました：
+	論文1: 主に韓国語と英語間の翻訳、RNNで固有表現単語を特殊処理した、主に名詞。目標はレア単語（名前と特殊な名詞、OOV）の精度を改善する（OOV: 低頻度語は未知語-out-of-vocabulary words）
+	論文2: NERを使用した翻訳は確かに翻訳精度を改善できることを証明した、けど、古いData setと古いやり方を使っていた。
+	論文3: 固有表現単語の代わりにNERのlabelを使い、Blue値: 3.0上げれる。
+	。。。
+	類似ですけど、違う所もたくさんあるけど（勉強しました）
+
+
+3)今の結果を使って意義素を訓練してGraphを作ることが考える。（例えば：AMR）
+	AMR（Abstract Meaning Representation） は有向非巡回グラフを用いて文の意味を表現したものであり
+	1) 現在グラフニューラルネットワーク(GNN; graph neural network)で自然言語処理の任務での表現がすごく良いです。論文4,5
+	2) graphはもうと語法と語彙を表現できる
+	3) この技術はもう成熟した、論文6,7,8, 或いは: https://github.com/graph4ai/graph4nlp
+	4) いまこの分野（GNN）の難点はGraphの形です、特殊な自然言語処理の任務が特殊なGraphを必要、もしもっと語彙を表現できるgraphを作ればダウンストリーム (downstream)良い表現をでれます
+	5) 論文9はAMR Graphで翻訳の例です
+	
+
+
+[参考文献]
+1) Named Entity Correction in Neural Machine Translation Using the Attention Alignment Map -- Mdpi 2021
+2) CS 224N. Using Named Entity Recognition to improve. Machine Translation.  -- https://nlp.stanford.edu/courses/cs224n/2010/reports/singla-nirajuec.pdf
+3) Neural Machine Translation Incorporating Named Entity -- acl 2018
+4) Lattice-Based Transformer Encoder for Neural Machine Translation -- acl 2019
+5) AMR Parsing as Sequence-to-Graph Transduction -- acl 2019
+6) Graph Neural Networks for Natural Language Processing: A Survey -- arXiv 2021
+7) A Comprehensive Survey on Graph Neural Networks -- IEEE Trans. Neural Netw. Learning Syst. 2021
+8) Deep Learning on Graphs: A Survey -- arXiv 2020
+9) Semantic Neural Machine Translation Using AMR -- acl 2019
+
+
+
+[次回の目標]
+続き
+
+```

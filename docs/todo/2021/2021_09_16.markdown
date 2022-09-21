@@ -1,0 +1,43 @@
+---
+layout: default
+title: Sep 16
+parent: 2021
+grand_parent: Progress Report
+---
+
+```txt
+09/16 進捗報告　Xiaoran Li
+
+[研究テーマ]
+「軸言語で偽パラレルコーパスの構築による論文スタイルテキスト変換」
+
+[現在の目標]
+Grammatical Error Correction（GEC）モデルを作る
+
+[今週の実施内容]
+(9/08) 水曜日 ： 論文を読む（３時間）
+(9/09) 木曜日 ： 論文を読む（５時間）
+(9/10) 金曜日 ： coding...(5時間)
+(9/11) 土曜日 ： coding...(5時間)
+(9/12) 日曜日 ： バイト
+(9/13) 月曜日 ： バイト
+(9/14) 火曜日 ： バイト
+(9/15) 水曜日 ： 論文を読む（５時間）
+
+[今回の実績]
+1,英語と日本語の相互翻訳するとき、存在する難点を理解する（主にbeasd on transformer model）文献「１」
+2,翻訳プログラミングを作りました、研究室のGPUのメモリーが足らない、15GB以上が必要（base version）。いまAWSで訓練した（訓練時間：一個K80で2日間が必要）
+3,今、自分のモデルは問題を存在する、これからfairseqに基づいて直します、https://github.com/pytorch/fairseq
+4,意義素に関する研究はいいアイデアを見つけた、今の研究は一ヶ月以内に完成する（予定発表：12月4日、第251回自然言語処理研究会）https://nl-ipsj.or.jp/
+5,後半学期の脳と行動（奥村　哲）科目は受け込みしますかどうかを考えます。
+	
+
+
+[参考文献]
+「１」：　主に「The 8th Workshop on Asian Translation（WAT2021）」相関論文
+http://lotus.kuee.kyoto-u.ac.jp/WAT/WAT2021/
+
+[次回の目標]
+続き
+
+```

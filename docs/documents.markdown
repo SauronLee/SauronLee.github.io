@@ -1,7 +1,6 @@
 ---
 layout: page
 title: Documents (C.V., Resume)
-permalink: /documents/
 nav_order: 8
 ---
 

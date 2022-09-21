@@ -1,7 +1,6 @@
 ---
 layout: page
 title: Certifications
-permalink: /certifications/
 nav_order: 6
 ---
 # Certifications

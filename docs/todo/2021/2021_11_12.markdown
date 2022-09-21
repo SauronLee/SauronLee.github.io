@@ -1,0 +1,72 @@
+---
+layout: default
+title: Nov 12
+parent: 2021
+grand_parent: Progress Report
+---
+
+```txt
+11/12 進捗報告　Xiaoran Li
+
+[研究テーマ]
+「意義素構築に関する研究」- NLP年度大会
+
+	- 申込受付開始 2021年12月14日（火）
+	- 論文原稿締切 2022年 1月14日（金）午後3時
+
+[現在の目標]
+　プログラミングを構築する
+
+[今週の実施内容]
+(11/6) 土曜日 ：バイト
+(11/7) 日曜日 ：バイト
+(11/8) 月曜日 ：バイト＋コーディング（7時間）
+(11/9) 火曜日 ：離散数学（暗号理論）諦めました（7時間）
+(11/10) 水曜日 ：コーディング（C++のGSLを勉強した）（10時間）
+(11/11) 木曜日 ：コーディング（6時間）
+
+[今回の実績]
+
+１、自分がグラフベースの意義素埋め込みをオープンソースにしました -->> https://github.com/SauronLee/GSR
+
+２、元のnode2vec[1]をLINE[2]に代わる（無向グラフ -> 有向グラフ）
+
+３、有向グラフ構築には、edge（word<->word : PMI）(word->doc : TF-IDF) (doc->sememe : LDA)
+		   を
+		   edge（word<->word : PMI）(word->doc : TF-IDF) (doc<-sememe : LSA) Latent Semantic Analysis (潜在意味解析)
+		   に代わる
+
+			ー　LSAでtopic drift（トピックドリフト）問題を解決します
+			ー　word->doc<-sememeでdocの表示は良い
+
+４、Text GCN[3]を引用する　（end to end. Input : 説明文、Output単語）
+
+５、Graph isomorphism (グラフ同型) 構築をHeterogeneous Graph (不均一グラフ)に代わる
+	ー　実はSememeをグラフに入れば元のグラフは二つドメイン (domain) があります -->> "doc-word-doc"隣接行列と"doc-sememe-doc"隣接行列
+	
+６、HAN (Heterogeneous Graph Attention Network)[4]を引用する 
+	今こちらやっている最中です
+
+
+今週はたくさんプログラミングとアルゴリズム問題があありました、
+良かったのは全部解決しました、
+とりあえず順調です。
+
+
+
+[参考文献]
+１、node2vec: Scalable Feature Learning for Networks........2016
+	- https://arxiv.org/abs/1607.00653
+２、LINE: Large-scale Information Network Embedding.........2015
+	- https://arxiv.org/abs/1503.03578
+３、Graph Convolutional Networks for Text Classification....2019
+	- https://arxiv.org/abs/1809.05679
+４、Heterogeneous Graph Attention Network...................2021
+	- https://arxiv.org/abs/1903.07293
+
+
+
+[次回の目標]
+続き
+
+```

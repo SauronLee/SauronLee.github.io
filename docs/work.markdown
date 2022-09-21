@@ -1,7 +1,6 @@
 ---
 layout: page
 title: Experience
-permalink: /work/
 nav_order: 4
 ---
 

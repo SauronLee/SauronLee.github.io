@@ -1,0 +1,48 @@
+---
+layout: default
+title: Nov 19
+parent: 2021
+grand_parent: Progress Report
+---
+
+```txt
+11/19 進捗報告　Xiaoran Li
+
+[研究テーマ]
+「意義素構築に関する研究」- NLP年度大会
+
+	- 申込受付開始 2021年12月14日（火）
+	- 論文原稿締切 2022年 1月14日（金）午後3時
+
+[現在の目標]
+　プログラミングを構築する
+
+[今週の実施内容]
+(11/13) 土曜日 ：論文を読む（5時間）
+(11/14) 日曜日 ：
+(11/15) 月曜日 ：論文を読む（5時間）
+(11/16) 火曜日 ：コーディング（3時間）
+(11/17) 水曜日 ：コーディング（5時間）
+(11/18) 木曜日 ：コーディング（6時間）
+
+[今回の実績]
+
+１、HANアルゴリズムの構築（PyTorch向け）はうまく行かなかった、予測するとき隣接行列の定義はまだ考えています。
+２、意義素学習のCorpusはWikipediaを使っているけど、辞書（WordNet）の単語定義も使ってみます。
+
+
+
+[参考文献]
+１、node2vec: Scalable Feature Learning for Networks...........2016
+２、LINE: Large-scale Information Network Embedding............2015
+３、Graph Convolutional Networks for Text Classification.......2019
+４、Heterogeneous Graph Attention Network......................2021
+５、Multi-Channel Reverse Dictionary Model.....................2021
+６、Learning to understand phrases by embedding the dictionary.2016
+
+
+
+[次回の目標]
+続き
+
+```

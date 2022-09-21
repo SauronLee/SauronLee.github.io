@@ -1,7 +1,6 @@
 ---
 layout: page
 title: Awards
-permalink: /awards/
 nav_order: 7
 ---
 
