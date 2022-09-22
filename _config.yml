@@ -82,7 +82,17 @@ aux_links:
     - "https://github.com/SauronLee"
   "Blog":
     - "https://www.sauron.online"
+
+mermaid:
+  # Version of mermaid library
+  # Pick an available version from https://cdn.jsdelivr.net/npm/mermaid/
+  version: "9.1.6"
+  # Put any additional configuration, such as setting the theme, in _includes/mermaid_config.js
+  # See also docs/ui-components/code
     
+# Back to top link
+back_to_top: true
+back_to_top_text: "Back to top"
     
 # Footer content
 # appears at the bottom of every page's main content

@@ -6,7 +6,13 @@ nav_order: 3
 nav_exclude: true
 ---
 
-
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
 
 * Building Sememe Knowlage Base via Unsupervised Learning  
   * --> Sememe Knowlage Base for Cross-lingual Language Model  
