@@ -22,7 +22,7 @@ title: Xiaoran(Sauron) Li
 email: 2121026.rs@sist.ac.jp
 description: >- # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://SauronLee.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+url: https://SauronLee.github.io # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: SauronLee
 github_username:  SauronLee
 
