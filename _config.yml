@@ -97,10 +97,10 @@ footer_content: "Copyright &copy; 2017-2022 Xiaoran Li. Distributed by an <a hre
 last_edit_timestamp: true # show or hide edit time - page must have `last_modified_date` defined in the frontmatter
 last_edit_time_format: "%b %e %Y at %I:%M %p" # uses ruby's time format: https://ruby-doc.org/stdlib-2.7.0/libdoc/time/rdoc/Time.html
 
-mermaid:
+# mermaid:
   # Version of mermaid library
   # Pick an available version from https://cdn.jsdelivr.net/npm/mermaid/
-  version: "9.1.7"
+#   version: "9.1.7"
 
 
 # Back to top link
