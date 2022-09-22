@@ -17,19 +17,18 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-
 title: Xiaoran(Sauron) Li
 email: 2121026.rs@sist.ac.jp
 description: >- # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog
-url: https://SauronLee.github.io # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://SauronLee.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: SauronLee
 github_username:  SauronLee
 
 # Build settings
-# theme: just-the-docs
+#theme: just-the-docs
 remote_theme: pmarsceill/just-the-docs
-#plugins:
+plugins:
   - jekyll-feed
 
 # Exclude from processing.
@@ -54,7 +53,6 @@ remote_theme: pmarsceill/just-the-docs
 # Enable or disable the site search
 # Supports true (default) or false
 search_enabled: true
-
 search:
   # Split pages into sections that can be searched individually
   # Supports 1 - 6, default: 2
@@ -78,7 +76,6 @@ search:
   # Enable or disable the search button that appears in the bottom right corner of every page
   # Supports true or false (default)
   button: false
-
 # Aux links for the upper right navigation
 aux_links:
   "GitHub":
@@ -87,23 +84,10 @@ aux_links:
     - "https://www.sauron.online"
     
     
-
 # Footer content
 # appears at the bottom of every page's main content
 # Note: The footer_content option is deprecated and will be removed in a future major release. Please use `_includes/footer_custom.html` for more robust markup / liquid-based content.
 footer_content: "Copyright &copy; 2017-2022 Xiaoran Li. Distributed by an <a href=\"https://github.com/just-the-docs/just-the-docs/tree/main/LICENSE.txt\">MIT license.</a>"
-
 # Footer last edited timestamp
 last_edit_timestamp: true # show or hide edit time - page must have `last_modified_date` defined in the frontmatter
 last_edit_time_format: "%b %e %Y at %I:%M %p" # uses ruby's time format: https://ruby-doc.org/stdlib-2.7.0/libdoc/time/rdoc/Time.html
-
-# mermaid:
-  # Version of mermaid library
-  # Pick an available version from https://cdn.jsdelivr.net/npm/mermaid/
-#   version: "9.1.7"
-
-
-# Back to top link
-# back_to_top: true
-# back_to_top_text: "Back to top"
-# Color scheme currently only supports "dark", "light"/nil (default), or a custom scheme that you define
