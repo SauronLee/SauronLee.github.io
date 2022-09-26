@@ -27,7 +27,7 @@ github_username:  SauronLee
 
 # Build settings
 #theme: just-the-docs
-remote_theme: pmarsceill/just-the-docs
+remote_theme: SauronLee/just-the-docs
 plugins:
   - jekyll-feed
 
