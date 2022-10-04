@@ -80,8 +80,8 @@ search:
 aux_links:
   "GitHub":
     - "https://github.com/SauronLee"
-  "Blog":
-    - "https://www.sauron.online"
+  # "Blog":
+  #   - "https://www.sauron.online"
 
 mermaid:
   # Version of mermaid library
