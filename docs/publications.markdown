@@ -47,21 +47,24 @@ nav_order: 2
 <br>
 
 
-* **wav2vecモデルによる方言音声資料のテキスト化**  
-    - Authors: 峯尾海成; **Xiaoran Li**; 谷口ジョイ; 高野敏明  
+* **Textualisation of Dialectal Speech Material Using the Wav2vec Model**  
+    - Authors: Mineo, Kainari; **Xiaoran Li**; Taniguchi, Joy; Takano, Toshiaki. 
     - Venue: Language Resource Workshop in Japan 2022  
+    - Links: [[PDF]](https://clrd.ninjal.ac.jp/lrw2022-programme.html)  
     - Code: [github](https://github.com/SauronLee/Splitting-and-Splicing-of-Speech)  
 
 <br>
 
 
-* **軸言語で偽パラレルコーパスの構築による論文スタイルテキスト変換**  
+* **Paper-style Text Transfer by Constructing a Pseudo-parallel Corpus in Axis Language**  
     - Authors: **Xiaoran Li**; Toshiaki Takano  
-    - Venue: 若手の会 (YANS) 16th  
+    - Links: [[PDF]](https://yans.anlp.jp/entry/yans2021program)  
+    - Venue: YANS 16th 2021
 
 <br>
 
 
 * **単語ベクトルに基づく語彙意味の関係予測**  
     - Authors: **Xiaoran Li**; Yo Ehara  
-    - Venue: 若手の会 (YANS) 15th  
+    - Links: [[PDF]](https://yans.anlp.jp/entry/yans2022program)  
+    - Venue: YANS 15th 2020
