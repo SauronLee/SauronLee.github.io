@@ -64,7 +64,7 @@ nav_order: 2
 <br>
 
 
-* **単語ベクトルに基づく語彙意味の関係予測**  
+* **Lexical Semantic Relation Prediction Based on Word Embeddings**  
     - Authors: **Xiaoran Li**; Yo Ehara  
     - Links: [[PDF]](https://yans.anlp.jp/entry/yans2022program)  
     - Venue: YANS 15th 2020
