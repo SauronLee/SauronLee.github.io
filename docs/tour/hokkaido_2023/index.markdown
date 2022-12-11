@@ -3,6 +3,7 @@ layout: default
 title: 2023年新年(札幌)
 parent: Tour
 #grand_parent: Progress Report
+#has_children: true
 ---
 #### 2022年12月28日（成田-新千岁） -  2023年1月2日（新千岁-成田）
 成员：刘裕（东京），王强（静冈），董波（东京），李笑然（静冈）
