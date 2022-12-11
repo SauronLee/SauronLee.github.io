@@ -26,7 +26,7 @@ parent: Tour
     札幌附近逗留
     酒店入住办理 Hotel Raffinato Sapporo（札幌站步行8分钟）
     * 每人每晚4400yen
-    * Note：入住时间为15:00-10:00(翌日)12月26号之前可免费退 https://www.agoda.com/hotel-raffinato-sapporo/hotel/sapporo-jp.html 
+    * 入住时间为15:00-10:00(翌日)12月26号之前可免费退 https://www.agoda.com/hotel-raffinato-sapporo/hotel/sapporo-jp.html 
 ---
 #### 2022年12月29日 行程 
 
@@ -41,7 +41,7 @@ parent: Tour
 
 * 12:00 - 次日
     * 小樽游玩（商品街，玻璃工艺博物馆，八音盒博物馆，电影情书取景地，天狗山，朝里站）
-    * 回札幌办理入住 Hotel Raffinato Sapporo（札幌站步行8分钟）Note：入住时间为15:00-10:00(翌日)12月26号之前可免费退 https://www.agoda.com/hotel-raffinato-sapporo/hotel/sapporo-jp.html 
+    * 回札幌办理入住 Hotel Raffinato Sapporo（札幌站步行8分钟）入住时间为15:00-10:00(翌日)12月26号之前可免费退 https://www.agoda.com/hotel-raffinato-sapporo/hotel/sapporo-jp.html 
   
 --- 
 #### 2022年12月30日 行程
@@ -50,13 +50,13 @@ parent: Tour
     * 旭山动物园 距札幌站以北151km，约2小时车程
     * 美瑛青池 距旭山动物园以东50km，约1小时车程
     * 头大佛 距札幌站以南17km，约30分车程
-    * 回札幌办理入住（合宿，札幌站步行8分钟）plat hostel keikyu sapporo ichiba Note：入住时间为16:00-10:00(翌日)  12月27号之前可免费退 https://www.agoda.com/ja-jp/plat-hostel-keikyu-sapporo-ichiba/hotel/sapporo-jp.html
+    * 回札幌办理入住（合宿，札幌站步行8分钟）plat hostel keikyu sapporo ichiba 入住时间为16:00-10:00(翌日)  12月27号之前可免费退 https://www.agoda.com/ja-jp/plat-hostel-keikyu-sapporo-ichiba/hotel/sapporo-jp.html
 --- 
 #### 2022年12月31日 行程
 * 7:00 - 未定
     * 租车（未预约），滑雪
     * 二世谷スキー場 距札幌站以南114km，约2小时车程 https://annupuri.info/winter/gelande/lift_course/
-    * 回札幌办理入住（合宿，札幌站步行8分钟）plat hostel keikyu sapporo ichiba Note：入住时间为16:00-10:00(翌日)  12月27号之前可免费退 https://www.agoda.com/ja-jp/plat-hostel-keikyu-sapporo-ichiba/hotel/sapporo-jp.html
+    * 回札幌办理入住（合宿，札幌站步行8分钟）plat hostel keikyu sapporo ichiba 入住时间为16:00-10:00(翌日)  12月27号之前可免费退 https://www.agoda.com/ja-jp/plat-hostel-keikyu-sapporo-ichiba/hotel/sapporo-jp.html
 --- 
 #### 2023年1月1日 行程
 * 7:00 - 未定
