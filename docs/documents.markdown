@@ -9,4 +9,5 @@ nav_order: 8
 <br>
 
 ###  Looking for Summer 2022 Internship 
-- [Resume for CS (1 page)](../images/cv_li.pdf) [Updated: Aug 23 2022]
+- [Resume for CS (1 page)](../images/en_cv_202207.pdf) [Updated: Aug 23 2022]
+- [Resume for CS (2 page) in japanese](../images/ja_cv_202212.pdf) [Updated: Dec 20 2022]
