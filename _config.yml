@@ -82,6 +82,8 @@ aux_links:
     - "https://github.com/SauronLee"
   "SwiftNotes":
     - "https://swiftnotes.readthedocs.io/"
+  "Swift4NLP":
+    - "https://swift4nlp.readthedocs.io/"
 
 mermaid:
   # Version of mermaid library
