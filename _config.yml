@@ -80,8 +80,8 @@ search:
 aux_links:
   "GitHub":
     - "https://github.com/SauronLee"
-  # "Blog":
-  #   - "https://www.sauron.online"
+  "SwiftNotes":
+    - "https://swiftnotes.readthedocs.io/"
 
 mermaid:
   # Version of mermaid library
