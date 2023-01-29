@@ -1,10 +1,10 @@
 ---
-layout: page
+layout: step_bar
 title: Publications
 nav_order: 2
 ---
 
-## Publications
+# 2022
 
 <br>
 
@@ -37,21 +37,22 @@ nav_order: 2
 <br>
 
 
+* **Textualisation of Dialectal Speech Material Using the Wav2vec Model**  
+    - Authors: Mineo, Kainari; **Xiaoran Li**; Taniguchi, Joy; Takano, Toshiaki. 
+    - Venue: Language Resource Workshop in Japan 2022  
+    - Links: [[PDF]](https://clrd.ninjal.ac.jp/lrw2022-programme.html)  
+    - Code: [github](https://github.com/SauronLee/Splitting-and-Splicing-of-Speech)  
+
+<br>
+
+# 2021
+
 * **The Analysis about Building Cross-lingual Sememe Knowledge Base Based on Deep Clustering Network**  
     - Authors: **Xiaoran Li**; Toshiaki Takano
     - Venue: Special Interest Group on Spoken Language Understanding and Dialogue Processing (SIG-SLUD) 92th  
     - Links: [[PDF] from arXiv.org](http://arxiv.org/abs/2208.05462)  
     - Code: soon!
     - BibTeX: [Google Scholar](https://scholar.googleusercontent.com/scholar.bib?q=info:5HWf8-j0W1YJ:scholar.google.com/&output=citation&scisdr=CgX_7cu-ENWDppJWdCg:AAGBfm0AAAAAYwdQbCitOJXwPEO99Kxp294hME8H6vZP&scisig=AAGBfm0AAAAAYwdQbDoaOyihCaTUGYW29kv_Cit472l_&scisf=4&ct=citation&cd=-1&hl=en)
-
-<br>
-
-
-* **Textualisation of Dialectal Speech Material Using the Wav2vec Model**  
-    - Authors: Mineo, Kainari; **Xiaoran Li**; Taniguchi, Joy; Takano, Toshiaki. 
-    - Venue: Language Resource Workshop in Japan 2022  
-    - Links: [[PDF]](https://clrd.ninjal.ac.jp/lrw2022-programme.html)  
-    - Code: [github](https://github.com/SauronLee/Splitting-and-Splicing-of-Speech)  
 
 <br>
 
@@ -63,6 +64,7 @@ nav_order: 2
 
 <br>
 
+# 2020
 
 * **Lexical Semantic Relation Prediction Based on Word Embeddings**  
     - Authors: **Xiaoran Li**; Yo Ehara  
