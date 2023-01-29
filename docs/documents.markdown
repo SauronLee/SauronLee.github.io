@@ -2,6 +2,7 @@
 layout: page
 title: Documents (C.V., Resume)
 nav_order: 8
+nav_exclude: true
 ---
 
 ## Resume
