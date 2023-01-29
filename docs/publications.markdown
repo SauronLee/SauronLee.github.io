@@ -4,7 +4,7 @@ title: Publications
 nav_order: 2
 ---
 
-# --2022--
+# Published-in-2022
 
 <br>
 
@@ -45,7 +45,7 @@ nav_order: 2
 
 <br>
 
-# --2021--
+# Published-in-2021
 
 * **The Analysis about Building Cross-lingual Sememe Knowledge Base Based on Deep Clustering Network**  
     - Authors: **Xiaoran Li**; Toshiaki Takano
@@ -64,7 +64,7 @@ nav_order: 2
 
 <br>
 
-# --2020--
+# Published-in-2020
 
 * **Lexical Semantic Relation Prediction Based on Word Embeddings**  
     - Authors: **Xiaoran Li**; Yo Ehara  
