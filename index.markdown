@@ -18,9 +18,9 @@ permalink: /
 |**Nippon Engineering College of Hachioji**<br>**(NEEC)**|Diploma of Computer Science<br>**Major:** System Development <br> **Concentration:** Dialog System Development|**<center>Tokyo, Japan</center>**<center>Apr 2018<br>  \|  <br> Apr 2020</center>|
 |**Changchun University of Technology**<br>**(CCUT)**|Bachelor of Engineering<br>**Major:** Machinery Automation|**<center>Changchun, China</center>**<center> \| <br> Sep 2014</center>|
 
-<br>
 
-## Contact
+# Contact
+
 
 **Email:** 2121026.rs[at]sist.ac.jp  
 **LinkedIn:** [https://www.linkedin.com/in/xiaoran-li-713890193/](https://www.linkedin.com/in/xiaoran-li-713890193/)  

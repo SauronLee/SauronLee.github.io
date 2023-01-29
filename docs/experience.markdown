@@ -1,11 +1,11 @@
 ---
-layout: page
+layout: step_bar
 title: Experience
 nav_order: 4
 ---
+
 # Working
 
-<br>
 
 |Position|Institution|Where and When|
 |----------|----------|:----------:|
@@ -15,7 +15,6 @@ nav_order: 4
 
 # Teaching
 
-<br>
 
 |Position|Institution|Where and When|
 |----------|----------|:----------:|
@@ -28,7 +27,10 @@ nav_order: 4
 | **Probability and Statistics:** 30 lessons (90 minutes per lesson) <br> Student Assistant (Part-time, Contractual)|Shizuoka Institute of Science and Technology | **<center>Shizuoka, Japan</center>**<center> Sep 2020 <br>  \| <br> Mar 2021 </center>|
 
 
+
 # Education
+
+
 
 |Institution|Degree|Where and When|
 |-------------|------------|-----------|
@@ -36,28 +38,33 @@ nav_order: 4
 |**Nippon Engineering College of Hachioji**<br>**(NEEC)**|Diploma of Computer Science<br>**Major:** System Development <br> **Concentration:** Dialog System Development|**<center>Tokyo, Japan</center>**<center>Apr 2018<br>  \|  <br> Apr 2020</center>|
 |**Changchun University of Technology**<br>**(CCUT)**|Bachelor of Engineering<br>**Major:** Machinery Automation|**<center>Changchun, China</center>**<center> \| <br> Sep 2014</center>|
 
-## Awards
-<br> 
+
+
+# Awards
+
+
 
 |Awarding body |Award|Where and When|
 |:----------:|:----------:|:----------:|
 |<center>Tokai Denpun Co., Ltd.</center>|<center>International Scholarship</center>|**<center>Shizuoka, Japan</center>**<center>Apr 2022<br>  \| <br> Apr 2023</center>|
 
+
+
 # Certifications
 
-<br>
+
 
 ## Coursera
 
-<br>
+
 
  ![deeplearningai](../images/deeplearningai.png)
  
-<br>
+
 
 ## Udacity
 
-<br>
+
 
 
  ![udacityfd](../images/udacityfd.png)
