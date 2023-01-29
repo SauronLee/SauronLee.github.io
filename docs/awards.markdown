@@ -2,11 +2,6 @@
 layout: page
 title: Awards
 nav_order: 7
+nav_exclude: true
 ---
 
-## Awards
-<br> 
-
-|Awarding body |Award|Where and When|
-|:----------:|:----------:|:----------:|
-|<center>Tokai Denpun Co., Ltd.</center>|<center>International Scholarship</center>|**<center>Shizuoka, Japan</center>**<center>Apr 2022<br>  \| <br> Apr 2023</center>|

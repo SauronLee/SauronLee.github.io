@@ -2,6 +2,7 @@
 layout: page
 title: Education
 nav_order: 3
+nav_exclude: true
 #has_children: true
 #has_toc: false
 #nav_exclude: true

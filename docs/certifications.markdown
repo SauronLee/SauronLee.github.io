@@ -2,6 +2,7 @@
 layout: page
 title: Certifications
 nav_order: 6
+nav_exclude: true
 ---
 # Certifications
 
