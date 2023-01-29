@@ -1,7 +1,7 @@
 ---
 layout: step_bar
 title: Publications
-nav_order: 22
+nav_order: 2
 ---
 
 # Published-in-2022
@@ -161,11 +161,11 @@ nav_order: 22
 </div>
 
 <script>
-const toggles = document.querySelectorAll('.faq-toggle')
+const toggles = document.querySelectorAll('.faq-toggle');
 
 toggles.forEach(toggle => {
     toggle.addEventListener('click', () => {
-        toggle.parentNode.classList.toggle('active')
+        toggle.parentNode.classList.toggle('active');
     })
-})
+});
 </script>
