@@ -26,11 +26,7 @@ permalink: /
 
 ###  Looking for Summer 2022 Internship (C.V., Resume)
 - [Resume for CS (1 page)](../images/en_cv_202207.pdf) [Updated: Aug 23 2022]
-- [Resume for CS (2 page) in japanese](../images/ja_cv_202212.pdf) [Updated: Dec 20 2022]
-
-<br>
-
-###  Contact
+- [Resume for CS (2 page) in japanese](../images/ja_cv_202212.pdf) [Updated: Dec 20 2022]  
 **Email:** 2121026.rs[at]sist.ac.jp  
 **LinkedIn:** [https://www.linkedin.com/in/xiaoran-li-713890193/](https://www.linkedin.com/in/xiaoran-li-713890193/)  
 **Github:** [https://github.com/SauronLee](https://github.com/SauronLee)
