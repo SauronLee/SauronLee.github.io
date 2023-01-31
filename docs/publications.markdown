@@ -4,7 +4,7 @@ title: Publications
 nav_order: 2
 ---
 
-# Published-in-2022
+# 2022
 
 
 <div class="faq-container">
@@ -89,7 +89,7 @@ nav_order: 2
       </div>
 </div> 
 
-# Published-in-2021
+# 2021
 
 <div class="faq-container">
       <div class="faq">
@@ -135,7 +135,7 @@ nav_order: 2
  
 </div>
 
-# Published-in-2020
+# 2020
 
 <div class="faq-container">
         <div class="faq">
