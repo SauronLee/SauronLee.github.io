@@ -1,0 +1,415 @@
+---
+layout: default
+title: Sorting Query Results
+parent: SQL CookBook 2 (translate)
+grand_parent: Progress Report
+---
+
+# 第三章（多表的使用）
+这个章节介绍了从多个表格连接`join`和设置`set`数据的方法，从多表连接数据是SQL的基础，多表设置数据也很重要。如果你想要在下面的章节中掌握复杂的查询方法必须先从这里开始。
+## 3.1 把一些行堆放到另一些行的上方
+问题：你想要返回一些存储在多个表格的数据，概念上，堆放一个结果集到另一个表的上方。这些表不需要有一个共通键，但是它们的列必须有同样的数据类型。比如：你想要展示`emp`表中的10部门的员工的名字和部门编号，连同`dept`表中的每个名字和部门编号。你的结果应当像下面这样：
+```sql
+    ENAME_AND_DNAME      DEPTNO
+    ---------------  ----------
+    CLARK                    10
+    KING                     10
+    MILLER                   10
+    ----------
+    ACCOUNTING               10
+    RESEARCH                 20
+    SALES                    30
+    OPERATIONS               40
+```
+解决：使用设置功能`union all`来合并多个表格的行：
+```sql
+select ename as ename_and_dname, deptno
+    from emp
+    where deptno = 10
+    union all
+ select '----------', null
+    from t1
+    union all
+select dname, deptno
+    from dept
+```
+解析：`union all`对个表中的行进行结合。所有的设置方法都一样，查询列表中的数量和数据类型必须全部匹配。比如：下面连个查询语句都将要失败：
+```sql
+select deptno   |  select deptno, dname
+  from dept     |    from dept
+ union all      |   union all
+select ename    |  select deptno
+from emp        | from emp
+```
+重点要注意的是`union all`会保留两表中的重复项，如果你想要过滤掉这些重复项可以使用`union`方法。列如：在emp.deptno和dept.deptno之间使用`union`方法的话只会返回4行：
+```sql
+select deptno
+    from emp
+    union
+select deptno
+    from dept
+
+       DEPTNO
+    ---------
+           10
+           20
+           30
+           40
+```
+在排序中指定`union`而不是`union all`可能会导致消除重复的排序操作。在处理大型的结果集的时候请记住这一点。使用`union`大致等同于下面的查询语句，它应用了`distinct`来接受从`union all`传来的数据。
+```sql
+select distinct deptno
+    from (
+select deptno
+    from emp
+    union all
+select deptno
+    from dept )
+
+       DEPTNO
+    ---------
+           10
+           20
+           30
+           40
+```
+除非必须否则你不应该在查询语句中使用`distinct`，同样的规则也应用于`union`,不到万不得已不应该用它来代替`union all`。列如：尽管此书我们已教学为目的用了有限的数量的表，在真实世界中如果你查询一个表有更加合适的方式。
+
+## 3.2 关联行合并
+问题：你想要从多个表中连接已知的共通列或者从多个表中连接共享的共通信息中返回一些行。比如：你想要展示部门10员工的名字以及员工部门的所在地，但是这些数据分别被存储在两个表格中，你的结果应该如下：
+```sql
+    ENAME       LOC
+    ----------  ----------
+    CLARK       NEW YORK
+    KING        NEW YORK
+    MILLER      NEW YORK
+```
+解决：连接表`emp`和`dept`的`deptno`
+```sql
+    1 select e.ename, d.loc
+    2   from emp e, dept d
+    3  where e.deptno = d.deptno
+    4    and e.deptno = 10
+```
+解析：这个解决方案是一个连接（join）的例子，更加准确的说是等价连接（equi-join）,它属于内连（inner join）类型,一个链接方法可以合并多表中的行到一个表中。等价连接是指基于一个相等连接条件的连接（比如：这里的一个部门的编号等于另一个）。一个内连是连接的原始类型；返回的每一行包含来自每个表的数据。
+从概念上来说，从`from`从句中返回的结果集合实际上是首先创建一个笛卡尔积（所有可能得行的组合）来产生的，如下:
+```sql
+    select e.ename, d.loc,
+        e.deptno as emp_deptno,
+        d.deptno as dept_deptno
+      from emp e, dept d
+     where e.deptno = 10
+
+    ENAME      LOC            EMP_DEPTNO DEPT_DEPTNO
+    ---------- -------------  ---------- -----------
+    CLARK   NEW YORK            10          10
+    KING    NEW YORK            10          10
+    MILLER  NEW YORK            10          10
+    CLARK   DALLAS              10          20
+    KING    DALLAS              10          20
+    MILLER  DALLAS              10          20
+    CLARK   CHICAGO             10          30
+    KING    CHICAGO             10          30
+    MILLER  CHICAGO             10          30
+    CLARK   BOSTON              10          40
+    KING    BOSTON              10          40
+    MILLER  BOSTON              10          40
+
+```
+所有`emp`表（在10部门）的员工与`dept`表中的每个部门一同返回。然后`where`语句中的e.deptno和d.depno（连接）约束了返回结果，比如只返回在e.deptno和d.depno相等的情况下的行：
+```sql
+select e.ename, d.loc,
+    e.deptno as emp_deptno,
+    d.deptno as dept_deptno
+    from emp e, dept d
+where e.deptno = d.deptno
+    and e.deptno = 10
+
+    ENAME       LOC             EMP_DEPTNO  DEPT_DEPTNO
+    ----------  --------------  ----------  -----------
+    CLARK       NEW YORK        10           10
+    KING        NEW YORK        10           10
+    MILLER      NEW YORK        10           10
+```
+一个可替代的解决方案是使用显示的`join`从句（`inner`关键字是可选项）：
+```sql
+select e.ename, d.loc
+    from emp e inner join dept d
+        on (e.deptno = d.deptno)
+where e.deptno = 10
+```
+如果你更倾向在`form`中连接逻辑而不是`where`中请使用`join`语句，两种风格都兼容。
+## 3.3 查找两个表之间的共通行
+问题：你想要寻找两个表中的共同行，但是有许多你可以连接的列。列如：思考下面的从`emp`表中创建的V视图：
+```sql
+create view V
+    as
+    select ename,job,sal
+      from emp
+     where job = 'CLERK'
+      select * from V
+
+    ENAME       JOB              SAL
+    ----------  --------- ----------
+    SMITH       CLERK            800
+    ADAMS       CLERK           1100
+    JAMES       CLERK            950
+    MILLER      CLERK           1300
+```
+这里只显示了工作为`cherk`的V视图，然而并没有展示所有可能展示的`emp`列.你想要返回`emp`表中与V视图相匹配的员工的`empno`,`ename`,`job`,`sal`和`deptno`，结果应如下方的一样：
+```sql
+    EMPNO     ENAME       JOB             SAL     DEPTNO
+    --------  ----------  --------- ---------- ---------
+       7369   SMITH       CLERK           800         20
+       7876   ADAMS       CLERK          1100         20
+       7900   JAMES       CLERK           950         30
+       7934   MILLER      CLERK          1300         10
+```
+解决：连接这些列所存在的所有表以保证结果的正确。或者使用`set`方法的`intersect`去避开执行连接而是只是返回两个表的交集（共通列）。
+MySQL and SQL Server
+连接`emp`和V视图并使用多个连接条件：
+```sql
+1 select e.empno,e.ename,e.job,e.sal,e.deptno
+2   from emp e, V
+3  where e.ename = v.ename
+4    and e.job   = v.job
+5    and e.sal   = v.sal
+```
+或者，你可以通过`join`语句执行相同的连接：
+```sql
+1 select e.empno,e.ename,e.job,e.sal,e.deptno
+2   from emp e join V
+3       on ( e.ename = v.ename
+4           and e.job = v.job
+5           and e.sal = v.sal )
+```
+DB2, Oracle, 和 PostgreSQL
+MySQL和SQL Server的解决方案同样适用于DB2, Oracle, 和 PostgreSQL。如果你需要V视图的返回值请使用这个方案：
+如果你不需要V视图的返回值的话你应当使用`set`的`intersect`与`in`的方法:
+```sql
+1 select empno,ename,job,sal,deptno
+2   from emp
+3  where (ename,job,sal) in (
+4   select ename,job,sal from emp
+5  intersect
+6 select ename,job,sal from V 7)
+```
+解析：当你要执行连接操作的时候为了返回正确的结果你必须考虑连接恰当的列，尤其是当你的行对于某些列有共通值的而对其他列有不同值时候。
+`set`的`intersect`方法可以两个数据源的共通行，当使用`intersect`时你需要比较两个表中的查询列的个数和数据类型必须相同，当使用`set`工作时要记住这一点，通常重复行不会被返回。
+## 3.4 返回只在一个表中出现的值
+问题：你想要寻找一个表（称之为源表）中的一些值，这些值没有出现在其他的目标表中。列如：你想要寻找在`dept`表中存在在`emp`表中不存在的部门。在例子中`deptno 40`来自于`dept`却不存在于`emp`：
+```sql
+        DEPTNO
+    ----------
+            40
+```
+解决：针对这个问题`difference`函数特别有效。DB2, PostgreSQL, SQL Server, 和 Oracle都支持`difference`函数操作。如果你的DBMS不支持`difference`函数的话可以使用与MySQL一样的子查询：
+DB2, PostgreSQL, 和 SQL Server
+使用`except`
+```sql
+1 select deptno from dept
+2 except
+3 select deptno from emp
+```
+Oracle
+使用`minus`
+```sql
+1 select deptno from dept
+2 minus
+3 select deptno from emp
+```
+MySQL
+使用子查询返回`emp`表中的所有的部门编号`deptno`到外面的查询，接到数据并且查询`dept`表中所有不在其中的行并返回：
+```sql
+1 select deptno
+2   from dept
+3  where deptno not in (select deptno from emp)
+```
+解析：
+DB2, PostgreSQL, 和 SQL Server
+`set`的`deference`方法让这个操作变得简单。`except`方法拿到第一个结果集合然后删减第二个结果集合的所有行，这非常像减法操作。
+`set`方法在使用时有一些限制，包括`except`。查询列表的数据类型和数量必须相互对应。而且`except`不返回多余的重复行，不像使用`not in`或`null`的子查询不会抛出一些问题（可以参照MySQL的讨论）。`except`方法会返回一些来着上方的查询语句的行并且没有在下方语句出现过。
+Oracle
+Oracle的解决方案与使用`except`语句完全相同，但是在Oracle里称之为`minus`,上述解释也适用于Oracle
+MySQL
+子查询语句可以返回来自于`emp`表中的所有部门号`depton`。外部查询返回来自于`dept`表子查询语句中“not in”或“not included in”的所有`depton`的查询结果。
+使用MySQL时需要考虑去重的问题。基于`except`或者`minus`方法在其他平台使用是从结果集中去重，确保每个`deptno`只汇报一次。当然，无论如何也只有这一种情况，在我的例子中`deptno`是一个关键字段，如果不是你应该使用`distinct`来确保每个`emp`中缺少的`deptno`值只报告一次：
+```sql
+select distinct deptno
+    from dept
+where deptno not in (select deptno from emp)
+```
+当使用`not in`时需要留意空值，思考下面的案例：
+```sql
+create table new_dept(deptno integer)
+insert into new_dept values (10)
+insert into new_dept values (50)
+insert into new_dept values (null)
+```
+如果你尝试寻找存在于`dept`表中而不存在于`new_dept`表中的`deptno`，并且在子查询语句中使用了`not in`,你将会发现没有任何返回结果
+```sql
+select *
+    from dept
+where deptno not in (select deptno from new_dept)
+```
+`deptno`中的20,30或者40并不存在于新表格中，但是结果没有返回，这是为什么？原因在于新的表格中存在空值。三行返回了子查询的结果，实际上`in`,`not in`本质上是或操作`or`,所以它要处理的是如何对空值进行逻辑或操作。
+为了明白这个，假如这是一个truth表（T=true,F=false,N=null）
+
+| OR | T | F | N |
+|----|---|---|---|
+| T  | T | T | T |
+| F  | T | F | N |
+| N  | T | N | N |
+
+| NOT |   |
+|-----|---|
+| T   | F |
+| F   | T |
+| N   | N |
+
+| AND | T | F | N |
+|-----|---|---|---|
+| T   | T | F | N |
+| F   | F | F | F |
+| N   | N | F | N |
+
+现在考虑下面例子中的的`in`或者与之等价的`or`：
+```sql
+    select deptno
+      from dept
+     where deptno in ( 10,50,null )
+
+     DEPTNO
+    -------
+         10
+
+    select deptno
+      from dept
+     where (deptno=10 or deptno=50 or deptno=null)
+
+    DEPTNO
+    -------
+         10
+```
+为什么只返回了一个10的结果？然而在`dept`表中`deptno`里有4个（10，20,30,40）每一个都会计算(deptno=10 or deptno=50 or deptno=null)。根据之前的真值表对于每个`deptno`（10，20,30,40）都会计算
+```sql
+    DEPTNO=10
+    (deptno=10 or deptno=50 or deptno=null)
+    = (10=10 or 10=50 or 10=null)
+    = (T or F or N)
+    = (T or N)
+    = (T)
+
+    DEPTNO=20
+    (deptno=10 or deptno=50 or deptno=null)
+    = (20=10 or 20=50 or 20=null)
+    = (F or F or N)
+    = (F or N)
+    = (N)
+
+    DEPTNO=30
+    (deptno=10 or deptno=50 or deptno=null)
+    = (30=10 or 30=50 or 30=null)
+    = (F or F or N)
+    = (F or N)
+    = (N)
+
+    DEPTNO=40
+    (deptno=10 or deptno=50 or deptno=null)
+    = (40=10 or 40=50 or 40=null)
+    = (F or F or N)
+    = (F or N)
+    = (N)
+```
+现在我们明确了为什么使用`in`或者`or`只会返回10，下面我们使用`not or`和`not in`考虑同样的例子：
+```sql
+    select deptno
+      from dept
+     where deptno not in ( 10,50,null )
+
+    ( no rows )
+
+    select deptno
+      from dept
+     where not (deptno=10 or deptno=50 or deptno=null)
+
+    ( no rows )
+```
+我们可以查看真值表来确定具体过程：
+```sql
+DEPTNO=10
+    NOT (deptno=10 or deptno=50 or deptno=null)
+    = NOT (10=10 or 10=50 or 10=null)
+    = NOT (T or F or N)
+    = NOT (T or N)
+    = NOT (T)
+    = (F)
+
+    DEPTNO=20
+    NOT (deptno=10 or deptno=50 or deptno=null)
+    = NOT (20=10 or 20=50 or 20=null)
+    = NOT (F or F or N)
+    = NOT (F or N)
+    = NOT (N)
+    = (N)
+
+    DEPTNO=30
+    NOT (deptno=10 or deptno=50 or deptno=null)
+    = NOT (30=10 or 30=50 or 30=null)
+    = NOT (F or F or N)
+    = NOT (F or N)
+    = NOT (N)
+    = (N)
+
+    DEPTNO=40
+    NOT (deptno=10 or deptno=50 or deptno=null)
+    = NOT (40=10 or 40=50 or 40=null)
+    = NOT (F or F or N)
+    = NOT (F or N)
+    = NOT (N)
+    = (N)
+```
+在SQL语句中“true or null”时为“true”，但是“false or null”时为“null”，你必须记住当使用“in”谓语或者用逻辑或“or”计算空值的时候的影响。
+为了避免“not in”与“null”的问题，可以在连接的时候使用相关的子查询语句`not exists`。相关子查询（correlated subquery）的使用是因为子查询中引入了外部查询的行，下面的例子是一个可替代的方案，使之不受空值影响（请回头看看之前的问题对比一下下面的解决方案）：
+```sql
+    select d.deptno
+      from dept d
+     where not exists (
+       select 1
+         from emp e
+        where d.deptno = e.deptno
+        )
+
+    DEPTNO
+    ----------
+    40
+
+    select d.deptno
+      from dept d
+     where not exists (
+       select 1
+         from new_dept nd
+        where d.deptno = nd.deptno
+        )
+
+    DEPTNO
+    ----------
+    30
+    40
+    20
+
+```
+概念上，解决方案里的外部查询考虑到`dept`里的每一行，对于每一行都执行了以下的操作：
+* 子查询是执行去看部门编号是否存在`emp`表里，注意这里的条件语句`d.deptno = nd.deptno`拿到了两个表中的部门编号。
+* 如果子查询返回了结果，然后`not exists(...)`会评估假，然后这个一行数据会被外部查询语句丢掉。
+* 如果子查询没有返回结果，`not exists(...)`会评估为真，然后这一行数据被外部查询句返回。
+  
+当关系子查询伴随“exists”或者“not exists”时，子查询列表中的数据不重要，这也就是为什么我们为什么选择“null”强迫你关注子查询中的连接项而不是查询列表（名字表示为1）：
+## 从一个表格中检索出与其他表不对应的行
+问题：你想要在一个表中寻找一些行，而这些行在其他表格中没有匹配到。用于两个有共通键的表格。列如:你想要找到哪些部门没有员工，结果应该如下所示：
+```sql
+        DEPTNO  DNAME           LOC
+    ----------  --------------  -------------
+            40  OPERATIONS      BOSTON
+```
+寻找

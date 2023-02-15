@@ -1,0 +1,934 @@
+---
+layout: default
+title: Preface
+parent: SQL CookBook 2 (translate)
+grand_parent: Progress Report
+---
+
+## 前言
+
+SQL是数据处理专业人士的通用语言，但是与其他流行语言相比它并没有受到相应的关注。因为人们只是在使用SQL的一些非常简单的功能，而他们认为这就是SQL的全部。  
+这本书将会告诉你更多的SQL知识，它拓展了用户的工具箱。比如：如何使用SQL去做统计分析；如何像一些商业智能工具一样去做报告；如何处理文本数据；如何分析更复杂的数据等等。  
+SQL CookBook 1 自从发售以来非常受欢迎，SQL CookBook 2（对于SQL有一定基础可读）有很多优势，比如：友好的风格和更广泛的话题。  
+然而，现如今计算量变得非常之巨大，这也影响到了古老的SQL语言（1970年）。本版本相比于第一个版本并不会学习新的语言而是会在之前版本之上添加了一些新的知识（这些知识在第一版中是不成熟的或者未被广泛使用的技术）。  
+比如有两个非常重要的点，Common table expressions(CTEs)包含递归CTEs可以使用5种方式，以至于解决SQL的实际限制，在附录中也详尽表达了递归CTEs的相关性与重要性。  
+窗口函数在第一版本中是非常新的概念，并且没有被使用。如今这项功能已被全面使用（在其他SQL中也被使用），本书也会详尽介绍窗口函数。  
+除了尽可能增加一些标准化查询之外，我们把新的一些功能写在了第六七章，在第七章解锁了一些数据分析应用（如：median absolute deviation；Benford’s law），在第六章我们添加了文本匹配和正则表达式（正则表达式从原14章移到了第六章）
+
+### 谁适合读这本书
+
+这本书适合任何接触或者想进一步了解SQL的人员。从能力方面而言，在读本书之前应有最基础的SQL知识或者看过Alan Beaulieu’s Learning SQL，列如你可以写一些实际的查询问题。  
+这本书还适合一些数据分析师，数据工程师，数据可视化工程师，从事商务智能工作的人，或者一些并没有直接接触数据库而是通过一些数据库编辑工具或数据可视化工具来更简单的获取数据的人们（他们可能只需要少量的理论就可以上手）。
+
+### 这本书不涉及什么
+
+这是一本非常实用的书籍，主要是使用SQL来理解数据。它并不包含所有的数据库知识，数据库的设计。我们只是在使用特定技术时讲解相关的理论知识。  
+这本书也没有涉及一些特定的数据类型比如：XML；JSON。
+
+### 版本与平台
+
+SQL在不断地维护更新，供应商在不断地添加新的功能，所以你需要知道本书所使用的平台与版本。
+* DB2 11.5
+* Oracle Database 19c
+* PostgreSQL 12
+* SQL Server 2017
+* MySQL 8.0
+  
+## 第一章（检索）
+### 1.1 查询一个表格中的所有数据
+查找一个表格的全部数据
+```sql
+select *
+    from emp
+```
+解析：
+符号`*`在SQL中有特殊的含义，使用它可以返回制定表格的每一列，因为这里没有where从句所以将会返回所以列。符号`*`可以替换为列的名字，比如：
+```sql
+select empno,ename,job,sal,mgr,hiredate,comm,deptno
+    from emp
+```
+在使用临时查询时使用`select *`更容易，但是如果在实际程序书写中最好指定要查询的列，虽然查询结果可能相同但是可以更加清晰地表明你所查询的表格都有哪些列。
+
+### 1.2 查询一个表格中行的子集
+问题：你有一个表格，并且想要查询指定的一行或几行
+解决：使用where可以保留指定条件下的行, (下列语句：保留部门编号为10的员工)
+```sql
+select *
+    from emp
+    where depto = 10
+```
+解析：
+`where`将会进行进一步的刷选，如果条件满足所有行则返回所有行，SQL提供了很多常用符号永远条件检索，比如`=`,`<`,`>`,`<=`,`>=`,`!`,`<>`.如果你想满使它满足多个条件可以使用异或`and`,`or`来表达并用括号来区分。
+
+### 1.3 查找一些满足多条件的行
+问题：你想要返回一些行，这行需要满足多种条件，
+解决：在`where`后使用`or`,`and`。比如：如果想要找到所有10号部门的员工，以及找到拿提成的员工，以及赚取最多2000块的20号部门的员工。
+```sql
+select *
+    from emp
+    where deptno = 10
+        or comm is not null
+        or sal <= 2000 and deptno=20
+```
+解析：
+你可以使用`and`,`or`或者括号的组合来查找你想要的行，在上面的案例中，你所想要查找的行是：
+* 部门编号为10的员工
+* 提成不为空的员工
+* 工资为小于2000，并且部门编号为20的员工
+
+括号的使用是为了统一处理计算，请考虑如果使用括号写查询语句的话，那么结果会有怎样的变化：
+```sql
+
+select *
+    from emp
+    where ( deptno = 10
+            or comm is not null
+            or sal <= 2000)
+    and deptno=20
+
+    EMPNO ENAME  JOB     MGR  HIREDATE      SAL       COMM  DEPTNO
+    ----- ------ ----- -----  ----------- ----- ----------  ------
+     7369 SMITH  CLERK  7902  17-DEC-1980   800                 20
+     7876 ADAMS  CLERK  7788  12-JAN-1983  1100                 20
+
+```
+### 1.4 返回表格中的一些列
+问题：你有一个表，想要查找指定的列，比如：仅仅查看表中的名字，公司部门id，工资
+解决：
+```sql
+select ename,deptno,sal
+    from emp
+```
+解析：
+在查询过程中，你要确保没有多余的信息返回，不然会造成大量的计算资源与时间的耗费。
+
+### 1.5 为列提供有意义的名称
+问题：你应当改变列的名字使它们更适合阅读与理解，比如：
+```sql
+select sal,comm
+    from emp
+```
+什么是`sal`,它是sale的简写吗？或者他是某个名称，什么是`comm`,它是communication的简写吗？你应当返回一些更有意义的标签。
+解决：改变查询结果的名字，使用`as`语法，original_name as new_name. 有些数据库可以省略`as`
+```sql
+select sal as salary, comm as commission
+    from emp
+
+    SALARY   COMMISSION
+    -------  ----------
+        800
+       1600         300
+       1250         500
+       2975
+       1250        1400
+       2850
+       2450
+       3000
+       5000
+       1500           0
+       1100
+       950 
+       3000 
+       1300
+```
+### 1.6 在where从句中使用列的别名
+问题：你在之前已经使用了别名，并且想在`where`从句中刷选这些列，但是当你努力尝试后出现错误，如下：
+```sql
+select sal as salary, comm as commission
+    from emp
+    where salary < 5000
+```
+解决：在查询语句中使用内联的方式
+```sql
+select *
+    from (
+    select sal as salary, comm as commission
+    from emp
+    )x
+    where salary < 5000
+```
+解析：在简单的案例中，你可以避免使用内联的方式，而是直接引用定义的comm或者sal。此解决方案介绍了如果你尝试在`where`中使用下列功能时该怎么做：
+* 聚合函数（Aggregate functions）
+* 标量子查询（Scalar subqueries）
+* 窗口函数（Windowing functions）
+* 别名（Aliases）
+在内联视图中设置别名可以在外面查询到，为什么需要这样做？ 因为`where`从句计算是在`select`之前，所以定义的别名在此刻并不存在，也就是说，这些别名直到`where`计算完成都没有被应用，但是`from`的执行顺序是在`where`之前。
+小壁虎：这里命名了内联视图为X，并非所有数据库都需要命名，但是也都接受命名
+### 1.7 列的连接
+问题：你想要返回很多列到一列中。比如：你想要通过员工表中想要生成下列结果
+```txt
+    CLARK WORKS AS A MANAGER
+    KING WORKS AS A PRESIDENT
+    MILLER WORKS AS A CLERK
+```
+然而在这个数据里，你需要查找两个不同的列ename和job：
+```sql
+select ename, job
+    from emp
+    where deptno = 10
+
+    ENAME      JOB
+    ---------- ---------
+    CLARK      MANAGER
+    KING       PRESIDENT
+    MILLER     CLERK
+```
+解决：通过你的DBMS所提供的内置函数来结合多个列
+DB2, Oracle, PostgreSQL
+```sql
+    select ename||' WORKS AS A '||job as msg
+    from emp
+    where deptno=10
+```
+MySQL
+```sql
+    select concat(ename, ' WORKS AS A ',job) as msg
+    from emp
+    where deptno=10
+```
+SQL Server
+```sql
+    select ename + ' WORKS AS A ' + job as msg
+    from emp
+    where deptno=10
+```
+### 1.8 在查询中使用逻辑条件
+问题：你想要在你的你的SQL语句中使用`if-else`功能，比如：你想要导出一个结果，如果一个员工的薪资是2000或者更少则发送一个“UNDERPAID”消息，如果一个员工的工资超过4000或者更高则回复一则“OVERPAID”消息，如果在这两者之间则回复“OK”，返回的结果格式应该为：
+```sql
+    ENAME      SAL         STATUS
+    ---------- ----------  ---------
+    SMITH       800         UNDERPAID
+    ALLEN       1600        UNDERPAID
+    WARD        1250        UNDERPAID
+    JONES       2975        OK
+    MARTIN      1250        UNDERPAID
+    BLAKE       2850        OK
+    CLARK       2850        OK
+    SCOTT       2450        OK
+    KING        3000        OK
+    TURNER      5000        OVERPAID
+    ADAMS       1500        UNDERPAID
+    JAMES       1100        UNDERPAID
+    FORD        950         UNDERPAID
+    MILLER      3000        OK
+```
+解决：
+使用`case`表达式可以直接在你的查询语句中表示逻辑条件：
+```sql
+select ename,sal,
+     case when sal <= 2000 then 'UNDERPAID'
+          when sal >= 4000 then 'OVERPAID'
+          else 'OK'
+     end as status
+from emp
+```
+解析：`case`允许你在查询中体现条件逻辑，你可以提供一个别名以至于提高返回结果集合的可读性，在这个实例中使用了status来表示`case`表达式。其中`else`是可选项，如果没有`else`的话，此表达式将会在不满足测试条件的地方返回“null”。
+### 1.9 返回限制数量的行数
+问题：你想要返回有限数量的行数，你不关心返回行的顺序，返回任意n行都可以
+解决：使用你的数据库中提供给你的内置函数去控制返回行的数量：
+DB2  
+在DB2中使用`fetch first`从句：
+```sql
+select *
+    from emp fetch first 5 rows only
+```
+MySQL and PostgreSQL
+使用`limit`
+```sql
+select *
+    from emp limit 5
+```
+Oracle
+在Oracle中控制行数需要在`where`中设置`rownum`语句
+```sql
+select *
+    from emp
+    where rownum <= 5
+```
+SQL Server
+使用`top`来重构返回行的数量:
+```sql
+select top 5 *
+    from emp
+```
+解析：很多SQL运营商提供像`fetch first`或者`limit`这样的语句让你可以从查询语句中选择展示行数，但是Oracle是不一样的，你必须使用`rownum`函数来返回每一行（从一开始递增）。
+当你使用`rownum <= 5`来返回前五行时会发生下面的状况
+1. Oracle执行你的查询
+2. 拿到第一行
+3. 判断当前行是否为第五行，如果不等于五则执行，如果为5则不执行
+4. 拿到下一行的行数
+5. 执行3
+正如上面的执行过程，每拿到一行后Oracle中的`rownum`会被赋值，这是一个关键，因为有很多Oracle开发者常常使用`rownum = 5`来返回第五行（执行会失败）。
+然而在连接`rownum`时使用等于号是很不好的，因为当你使用`rownum = 5`时会发生下面过程：
+1. Oracle执行你的查询
+2. 拿到第一行
+3. 我们是否获取到第五行的行数，如果没有丢弃当前行数，因为它不符合条件，如果是第五行则返回5，但是答案不会确定
+4. Oracle会继续读取下一行的行数并且命名为1，因为查询句返回的第一行永远为1
+5. 执行3
+
+仔细地研究这个过程你就会发现为什么`rownum = 5`返回第五行会失败，因为在你之前没有返回1到4行就永远到不了第5行。也许你可能会发现当`rownum = 1`可以被执行，这似乎与之前的解释相矛盾，这是因为Oracle会至少执行一次来确定表中是否有行，仔细阅读之前的执行过程就会明白这一点
+
+### 1.10 从表中获取n条随机记录
+问题：你想要返回表中具体数量的记录，你需要更改下面的代码以至于成功执行来获取五条不同的记录
+```sql
+select ename, job
+    from emp
+```
+解决：使用你所使用的DBMS中的内置函数来返回随机值。使用`order by`从句对行进行随机排序，我们使用之前的技术对限定数量的行进行随机排序
+DB2
+使用内置函数`rand`连接`order by`和`fetch`
+```sql
+select ename,job
+    from emp
+    order by rand() fetch first 5 rows only
+```
+MySQL
+使用内置函数`rand`连接`order by`和`limit`
+```sql
+select ename,job
+    from emp
+    order by rand() limit 5
+```
+PostgreSQL
+使用内置函数`random`连接`order by`和`limit`
+```sql
+select ename,job
+    from emp
+    order by random() limit 5
+```
+Oracle
+使用从内置包`dbms_random`中找到内置函数`value`,并连接`order by`和内置函数`random`
+```sql
+    select *
+        from (
+            select ename, job
+            from emp
+            order by dbms_random.value()
+        )
+    where rownum <= 5
+```
+SQL Server
+使用内建函数`newid`并使用`top`和`order by`来返回随机结果集合
+```sql
+select top 5 ename,job
+    from emp
+    order by newid()
+```
+解析：`order by`从句允许使用函数返回值，并通过返回值来更改结果集合中的顺序。这些解决方案都在`order by`执行过后限制了返回的行数。非Oracle用户可能会发现Oracle的解决方案其实是其他SQL的底层实现。
+需要注意的是，千万不要混淆`order by`里面函数与常量，当使用常量时是根据查询列表中的第几顺位进行排序，当使用函数时是根据函数的执行结果进行排序。
+### 寻找空值
+问题：你想要寻找所有空值的行，在特定的列中。
+解决：要解决值是否为空的问题必须使用`is null`
+```sql
+select *
+    from emp
+    where comm is null
+```
+解析：null不等于任何东西甚至是它本身，所以你不能使用`=`或`!=`来测试列是否为空，要检测某行是否为空一必须使用`is null`或者你也可以使用`is not null`在一个列中找到不为null的行。
+### 1.12 把空值变成真实值
+问题：你有很多包含空值的行并且想被替换掉这些空值的行。
+解决：使用`coalesce`使真实值替换掉空值
+```sql
+select coalesce(comm,0)
+    from emp
+```
+解析：`coalesce`函数接受一个或多个参数。这个函数返回列表中的第一个非空值。在上面的案例中，只要comm不为空，就返回comm的值。否则，返回0。
+在处理空值时尽量使用你所用的SQL的内置函数，在此之外也有其他的解决方式，比如使用`case`
+```sql
+select case
+    when comm is not null then comm
+    else 0
+    end
+from emp
+```
+虽然你可以使用`case`来解决把空值转换成真实值的方式，但是，你也可以看到，使用`coalesce`更加简练和快捷。
+
+### 匹配查找
+问题：你想要返回一些模式匹配的行，如下面的问题和搜索结果集合
+```sql
+select ename, job
+    from emp
+    where deptno in (10,20)
+
+    ENAME       JOB
+    ----------  ---------
+    ENAME       JOB
+    ----------  ---------
+    SMITH       CLERK
+    JONES       MANAGER
+    CLARK       MANAGER
+    SCOTT       ANALYST
+    KING        PRESIDENT
+    ADAMS       CLERK
+    FORD        ANALYST
+    MILLER      CLERK
+```
+上图展示了10和20部门数的员工，你只想要返回名字里有“I”的，或者工作名结尾为“ER”的，像这样：
+```sql
+    ENAME       JOB
+    ----------  ---------
+    SMITH       CLERK
+    JONES       MANAGER
+    CLARK       MANAGER
+    KING        PRESIDENT
+    MILLER      CLERK
+```
+
+解决：使用`like`方法结合SQL的通配符方法（%）
+```sql
+    select ename, job
+        from emp
+    where deptno in (10,20)
+        and (ename like '%I%' or job like '%ER')
+```
+解析：当使用`like`进行匹配（pattern-match）方法时，(%)可以匹配任何符号序列，有很多SQL使用(“_”)来匹配单个字符。使用%包围在“I”四周则返回包含一个或多个“I”的字符串，如果不这样做会影响到查询结果。比如在查询“ER”时仅仅在前面添加%。如果需要查找所有包含“ER”为首字母的工作名称则需要再“ER”的后面添加%。
+
+### 1.14 总结
+这些技术也许简单，但它们也是必不可缺的。信息检索是数据库查询的核心，这也意味着这些方法是本书在余下部分所讨论的核心。
+
+## 第二章（对结果排序）
+这一章专注于对请求结果的自定义展示。通过了解如何控制如何返回有组织的结果，你可以提供更加有可读性和有意义的数据。
+
+### 2.1 返回指定排序的查询结果
+问题：你想要显示10号部门的员工的名字，工作和薪资，并根据工资从低到高排序，你希望返回的结果应该为:
+```sql
+    ENAME       JOB               SAL
+    ----------  ---------  ----------
+    MILLER      CLERK            1300
+    CLARK       MANAGER          2450
+    KING        PRESIDENT        5000
+```
+解决：使用`order by`从句
+```sql
+    select ename,job,sal
+        from emp
+    where deptno = 10
+        order by sal asc
+```
+解析：`order by`从句允许你对结果集合的行进行排序。上文中的排序基于工资升序排序。在默认的情况下`order by`会升序排序，`asc`语句是一个选择项，指定为`desc`为降序排列:
+```sql
+    select ename,job,sal
+      from emp
+     where deptno = 10
+     order by sal desc
+
+    ENAME       JOB               SAL
+    ----------  ---------  ----------
+    KING        PRESIDENT        5000
+    CLARK       MANAGER          2450
+    MILLER      CLERK            1300
+```
+在这里你不需要指定列的名称来根据某一列进行排序，你可以把列名替换成数字。数字从1开始匹配选择列表（select list）从左到右，比如：
+```sql
+    select ename,job,sal
+      from emp
+     where deptno = 10
+     order by 3 desc
+
+    ENAME       JOB               SAL
+    ----------  ---------  ----------
+    KING        PRESIDENT        5000
+    CLARK       MANAGER          2450
+    MILLER      CLERK            1300
+```
+这里`order by`语句中的的数字3会匹配到选择列表中的第三个，也就是工资列。
+
+### 2.2 对多个域排序
+问题：你想要对`emp`表中的行排序，根据的条件是：首先员工部门`deptno`升序排序，其次根据工资进行降序排序。你想要返回的结果应该为：
+
+```sql
+    EMPNO       DEPTNO         SAL          ENAME       JOB
+    ----------  ----------  ----------  ----------  ---------
+    7839          10         5000        KING        PRESIDENT
+    7782          10         2450        CLARK       MANAGER
+    7934          10         1300        MILLER      CLERK
+    7788          20         3000        SCOTT       ANALYST
+    7902          20         3000        FORD        ANALYST
+    7566          20         2975        JONES       MANAGER
+    7876          20         1100        ADAMS       CLERK
+    7369          20         800         SMITH       CLERK
+    7698          30         2850        BLAKE       MANAGER
+    7499          30         1600        ALLEN       SALESMAN
+```
+解决：在`order by`中列出不同排序的列，用逗号隔开
+```sql
+    select empno,deptno,sal,ename,job
+        from emp
+    order by deptno, sal desc
+```
+解析： `order by`排序的优先级是从左到右。如果你是使用的查询列表中的列的数字位置那么数字不可以超过查询列表中列的数量。你可以生成根据一个没有出现在查询列表中的列进行排序，但是这样做的话你必须使用明确的列名。而当你使用`group by`或者`distinct`在你的查询语句中的时候，将不能使用查询列表以外的列作为排序依据。
+### 2.3 根据字符串排序
+问题：你想要根据指定字符串的部分对搜索结果进行排序。列如，你想要返回`emp`表中员工的名字，工作，并且根据工作列中后两个字符进行排序，其结果应当为：
+```sql
+    ENAME       JOB
+    ----------  ---------
+    KING        PRESIDENT
+    SMITH       CLERK
+    ADAMS       CLERK
+    JAMES       CLERK
+    MILLER      CLERK
+    JONES       MANAGER
+    CLARK       MANAGER
+    BLAKE       MANAGER
+    ALLEN       SALESMAN
+    MARTIN      SALESMAN
+    WARD        SALESMAN
+    TURNER      SALESMAN
+    SCOTT       ANALYST
+    FORD        ANALYST
+```
+解决：
+DB2, MySQL, Oracle, 和 PostgreSQL
+使用`order by`中的`substr`函数：
+```sql
+    select ename,job
+      from emp
+     order by substr(job,length(job)-2)
+```
+SQL Server
+```sql
+    select ename,job
+      from emp
+     order by substring(job,len(job)-2,2)
+```
+解析：使用你的DBMS中子字符串的方法，你能够更加容易地跟据任意字符串的部分进行排序。对后两个字符排序就是寻找字符串的尾端（也就是字符串的长度）减去2，起始位置是字符串中的第二个字符。然后将会取到起始位置后的所有字符。其中SQL Server的`substring`不同于`substr`，因为它需要接受3个参数来指定需要取多少个字符
+
+### 2.4 对混合字母数字的字符串进行排序
+问题：你有一些字母数字数据，并且想根据任一字母或数字进行排序，考虑创建一个视图如下：
+```sql
+ create view V
+    as
+    select ename||' '||deptno as data
+        from emp
+    select * from V
+
+    DATA
+    -------------
+    SMITH 20
+    ALLEN 30
+    WARD 30
+    JONES 20
+    MARTIN 30
+    BLAKE 30
+    CLARK 10
+    SCOTT 20
+    KING 10
+    TURNER 30
+    ADAMS 20
+    JAMES 30
+    FORD 20
+    MILLER 10
+```
+你想要根据根据名称或部门编号排序，根据公司编号排序的话如下：
+```sql
+    DATA
+    ----------
+    CLARK 10
+    KING 10
+    MILLER 10
+    SMITH 20
+    ADAMS 20
+    FORD 20
+    SCOTT 20
+    JONES 20
+    ALLEN 30
+    BLAKE 30
+    MARTIN 30
+    JAMES 30
+    TURNER 30
+    WARD 30
+```
+根据名字排序的话如下：
+```sql
+    DATA
+    ---------
+    ADAMS 20
+    ALLEN 30
+    BLAKE 30
+    CLARK 10
+    FORD 20
+    JAMES 30
+    JONES 20
+    KING 10
+    MARTIN 30
+    MILLER 10
+    SCOTT 20
+    SMITH 20
+    TURNER 30
+    WARD 30
+```
+解决：
+Oracle, SQL Server, and PostgreSQL
+使用`replace`和`translate`进行修改以进行排序：
+
+```sql
+
+    /* ORDER BY DEPTNO */
+    select data
+    from V
+    order by replace(data,
+            replace(
+           translate(data,'0123456789','##########'),'#',''),'')
+
+    /* ORDER BY ENAME */
+    select data
+      from V
+     order by replace(
+              translate(data,'0123456789','##########'),'#','')
+
+```
+DB2
+DB2中的隐式类型转换比Oracle和PostgreSQL更为严格，所以你需要使用`cast`将部门编号`deptno`转换成`char`以至于视图V有效。而不是重新创建一个新的视图V，这个视图将简单地使用内联视图。在解决方案中同样使用了`replace`和`translate`，只是`translate`的参数略有不同。
+```sql
+/* ORDER BY DEPTNO */
+    select *
+      from (
+    select ename||' '||cast(deptno as char(2)) as data
+        from emp 
+            )v
+    order by replace(data,
+          replace(
+            translate(data,'##########','0123456789'),'#',''),'')
+
+/* ORDER BY ENAME */
+    select *
+        from (
+    select ename||' '||cast(deptno as char(2)) as data
+        from emp 
+            )v
+    order by replace(
+         translate(data,'##########','0123456789'),'#','')
+```
+MySQL
+由于此平台当前版本不支持`translate`函数，所以没有提供MySQL的解决方案。
+解析： `replace`和`translate`移除了每行的数字或者字符并通过其中一个进行简单的排序。值通过`order by`显示到下列结果中（使用Oracle作为例子，其他三个SQL运营也是同样的方法；只是DB2的传递参数的顺序不同）
+```sql
+    select data,
+        replace(data,
+        replace(
+    translate(data,'0123456789','##########'),'#',''),'') nums,
+        replace(
+        translate(data,'0123456789','##########'),'#','') chars
+    from V
+
+    DATA         NUMS   CHARS
+    ------------ ------ ----------
+    SMITH 20     20     SMITH
+    ALLEN 30     30     ALLEN
+    WARD 30      30     WARD
+    JONES 20     20     JONES
+    MARTIN 30    30     MARTIN
+    BLAKE 30     30     BLAKE
+    CLARK 10     10     CLARK
+    SCOTT 20     20     SCOTT
+    KING 10      10     KING
+    TURNER 30    30     TURNER
+    ADAMS 20     20     ADAMS
+    JAMES 30     30     JAMES
+    FORD 20      20     FORD
+    MILLER 10    10     MILLER
+```
+### 2.5 排序时处理空值
+问题：你想要`comm`列对`emp`表格进行排序，但是该域是有空值，你需要一个方法使得最后排序空值
+```sql
+    ENAME              SAL        COMM
+    ----------  ----------  ----------
+    TURNER            1500           0
+    ALLEN             1600         300
+    WARD              1250         500
+    MARTIN            1250        1400
+    SMITH              800
+    JONES             2975
+    JAMES              950
+    MILLER            1300
+    FORD              3000
+    ADAMS             1100
+    BLAKE             2850
+    CLARK             2450
+    SCOTT             3000
+    KING              5000
+```
+或者先排序空值
+```sql
+    ENAME              SAL        COMM
+    ----------  ----------  ----------
+    SMITH              800
+    JONES             2975
+    JAMES              950
+    MILLER            1300
+    FORD              3000
+    ADAMS             1100
+    BLAKE             2850
+    CLARK             2450
+    SCOTT             3000
+    KING              5000
+    MARTIN            1250        1400
+    WARD              1250         500
+    ALLEN             1600         300
+    TURNER            1500           0
+```
+解决：取决于你想要怎样展示数据和你所使用的RDBMS是如何排序空值的。你可以排序存在空值的列按照升序或者降序：
+```sql
+select ename,sal,comm
+    from emp
+    order by 3
+
+select ename,sal,comm
+    from emp
+    order by 3 desc
+```
+这个解决方案让你可以通过升序或降序对允许空值列进行排序，根据你的需求，这个可能是或者不是你想要的。如果相反，你想要对空值排序区别于非空值，列如你想要升序排序非空值或者降序排序所有的空值，你可以使用`case`表达式去有条件地排序。
+DB2, MySQL, PostgreSQL, 和 SQL Server
+当值为空时使用`case`表达式进行“flag”，这个方法是有两个值的“flag”，一个表示空值一个表示非空值，当标记结束，将标记后的数据添加到`order by`从句中进行排序。你将很容易地对空值进行排序，先或者后，而不受非空值的影响。
+```sql
+/* NON-NULL COMM SORTED ASCENDING, ALL NULLS LAST */
+    select ename,sal,comm
+        from (
+            select ename,sal,comm,
+                case when comm is null then 0 else 1 end as is_null
+            from emp
+            )x
+        order by is_null desc,comm
+
+    ENAME     SAL        COMM
+    ------  -----  ----------
+    TURNER   1500           0
+    ALLEN    1600         300
+    WARD     1250         500
+    MARTIN   1250        1400
+    SMITH     800
+    JONES    2975
+    JAMES     950
+    MILLER   1300
+    FORD     3000
+    ADAMS    1100
+    BLAKE    2850
+    CLARK    2450
+    SCOTT    3000
+    KING     5000
+
+    /* NON-NULL COMM SORTED DESCENDING, ALL NULLS LAST */
+    select ename,sal,comm
+      from (
+            select ename,sal,comm,
+                case when comm is null then 0 else 1 end as is_null
+            from emp
+            )x
+        order by is_null desc,comm desc
+
+    ENAME     SAL        COMM
+    ------  -----  ----------
+    MARTIN   1250        1400
+    WARD     1250         500
+    ALLEN    1600         300
+    TURNER   1500           0
+    SMITH     800
+    JONES    2975
+    JAMES     950
+    MILLER   1300
+    FORD     3000
+    ADAMS    1100
+    BLAKE    2850
+    CLARK    2450
+    SCOTT    3000
+    KING     5000
+
+    /* NON-NULL COMM SORTED ASCENDING, ALL NULLS FIRST */
+    select ename,sal,comm
+        from (
+            select ename,sal,comm,
+                case when comm is null then 0 else 1 end as is_null
+            from emp
+            )x
+        order by is_null,comm
+
+    ENAME    SAL       COMM
+    ------ ----- ----------
+    SMITH    800
+    JONES   2975
+    CLARK   2450
+    BLAKE   2850
+    SCOTT   3000
+    KING    5000
+    JAMES    950
+    MILLER  1300
+    FORD    3000
+    ADAMS   1100
+    TURNER  1500          0
+    ALLEN   1600        300
+    WARD    1250        500
+    MARTIN  1250       1400
+
+    /* NON-NULL COMM SORTED DESCENDING, ALL NULLS FIRST */
+    select ename,sal,comm
+        from (
+            select ename,sal,comm,
+                case when comm is null then 0 else 1 end as is_null
+            from emp
+        )x
+    order by is_null,comm desc
+
+    ENAME    SAL       COMM
+    ------ ----- ----------
+    SMITH    800
+    JONES   2975
+    CLARK   2450
+    BLAKE   2850
+    SCOTT   3000
+    KING    5000
+    JAMES    950
+    MILLER  1300
+    FORD    3000
+    ADAMS   1100
+    MARTIN  1250       1400
+    WARD    1250        500
+    ALLEN   1600        300
+    TURNER  1500          0
+```
+Oracle
+Oracle用户可以使用其他平台的解决方案，也可以使用Oracle独有的解决方案（如下），利用`nulls first`或`nulls last`的`order by`拓展确认空值的排序而无需考虑非空值的排序。
+```sql
+    /* NON-NULL COMM SORTED ASCENDING, ALL NULLS LAST */
+    1 select ename,sal,comm
+    2   from emp
+    3  order by comm nulls last
+
+    ENAME    SAL       COMM
+    ------  ----- ---------
+    TURNER   1500         0
+    ALLEN    1600       300
+    WARD     1250       500
+    MARTIN   1250      1400
+    SMITH     800
+    JONES    2975
+    JAMES     950
+    MILLER   1300
+    FORD     3000
+    ADAMS    1100
+    BLAKE    2850
+    CLARK    2450
+    SCOTT    3000
+    KING     5000
+
+    /* NON-NULL COMM SORTED ASCENDING, ALL NULLS FIRST */
+    1 select ename,sal,comm
+    2   from emp
+    3  order by comm nulls first
+    ENAME    SAL       COMM
+    ------ ----- ----------
+    SMITH    800
+    JONES   2975
+    CLARK   2450
+    BLAKE   2850
+    SCOTT   3000
+    KING    5000
+    JAMES    950
+    MILLER  1300
+    FORD    3000
+    ADAMS   1100
+    TURNER  1500          0
+    ALLEN   1600        300
+    WARD    1250        500
+    MARTIN  1250       1400
+
+    /* NON-NULL COMM SORTED DESCENDING, ALL NULLS FIRST */
+    1 select ename,sal,comm
+    2   from emp
+    3  order by comm desc nulls first
+
+    ENAME    SAL       COMM
+    ------ ----- ----------
+    SMITH    800
+    JONES   2975
+    CLARK   2450
+    BLAKE   2850
+    SCOTT   3000
+    KING    5000
+    JAMES    950
+    MILLER  1300
+    FORD    3000
+    ADAMS   1100
+    MARTIN  1250       1400
+    WARD    1250        500
+    ALLEN   1600        300
+    TURNER  1500          0
+```
+解析：除非你所使用的RDBMS提供给你了一个更简单的方案来操纵空值先或者后，而不需要在同一列中修改非空值（比如：Oracle）
+小壁虎：在撰写本书的同时DB2用户可以在窗口函数中使用`nulls first`或`nulls last`的`over`子句的`order by`拓展中，但是不能直接使用在整个返回的结果集的`order by`拓展中。
+增加额外列的目的是允许你定义空值，并且利用这个列进行排序，先或者后。下面的查询语句中展示了上文的内联X视图（非Oracle）
+```sql
+    select ename,sal,comm,
+           case when comm is null then 0 else 1 end as is_null
+    from emp
+
+    ENAME    SAL       COMM    IS_NULL
+    ------ ----- ---------- ----------
+    SMITH    800                  0
+    ALLEN   1600    300           1
+    WARD    1250    500           1
+    JONES   2975                  0
+    MARTIN  1250   1400           1
+    BLAKE   2850                  0
+    CLARK   2450                  0
+    SCOTT   3000                  0
+    KING    5000                  0
+    TURNER  1500      0           1
+    ADAMS   1100                  0
+    JAMES    950                  0
+    FORD    3000                  0
+    MILLER  1300                  0
+```
+使用`is_null`返回的值你可以轻松的对空值进行先后执行排序，而不涉及`comm`
+### 对数据依赖键进行排序
+问题你想要根据很多的逻辑条件进行排序。比如如果工作`job`的名字是`salesman`时对`comm`进行排序，否则对`sal`进行排序，你将会返回下列结果：
+```sql
+    ENAME             SAL JOB             COMM
+    ---------- ---------- --------- ----------
+    TURNER          1500  SALESMAN          0
+    ALLEN           1600  SALESMAN        300
+    WARD            1250  SALESMAN        500
+    SMITH           800   CLERK
+    JAMES           950   CLERK
+    ADAMS           1100  CLERK
+    MILLER          1300  CLERK
+    MARTIN          1250  SALESMAN       1400
+    CLARK           2450  MANAGER
+    BLAKE           2850  MANAGER
+    JONES           2975  MANAGER
+    SCOTT           3000  ANALYST
+    FORD            3000  ANALYST
+    KING            5000  PRESIDENT
+```
+解决：在`order by`中使用`case`表达式：
+```sql
+    1 select ename,sal,job,comm
+    2   from emp
+    3  order by case when job = 'SALESMAN' then comm else sal end
+```
+解析：你可以使用`case`表达式去动态地改变对返回结果的排序，数据通过`order by`将会展示为：
+```sql
+    select ename,sal,job,comm,
+           case when job = 'SALESMAN' then comm else sal end as ordered
+      from emp
+     order by 5
+
+    ENAME             SAL JOB             COMM    ORDERED
+    ---------- ---------- --------- ---------- ----------
+    TURNER      1500 SALESMAN         0                0
+    ALLEN       1600 SALESMAN       300              300
+    WARD1       250 SALESMAN        500              500
+    SMITH       800 CLERK                            800
+    JAMES       950 CLERK                            950
+    ADAMS       1100 CLERK                          1100
+    MILLER      1300 CLERK                          1300
+    MARTIN      1250 SALESMAN       1400            1400
+    CLARK2      450 MANAGER                         2450
+    BLAKE2      850 MANAGER                         2850
+    JONES2      975 MANAGER                         2975
+    SCOTT       3000 ANALYST                        3000
+    FORD        3000 ANALYST                        3000
+    KING        5000 PRESIDENT                      5000
+
+```
+### 2.7 总结
+对查询结果排序是SQL用户的核心技能，`order by`是非常有用的，但是就像我们在本章看到的这样，仍然需要一些细微的差别才可以有效地使用，驾驭它很重要，因为下面很多章节中的技术都需要依赖此方法。
