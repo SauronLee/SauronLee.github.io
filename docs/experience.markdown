@@ -9,7 +9,6 @@ nav_order: 4
 
 |Position|Institution|Where and When|
 |----------|----------|:----------:|
-| **Software Engineer** | MOT Co.,Ltd. | **<center>Tokyo, Japan</center>**<center> Apr 2023 <br>  \| <br> Current </center>|
 | **Elevator Maintenance** | Otis Elevator （China） Investment Co.,Ltd. | **<center>Hangzhou, China</center>**<center> Mar 2015 <br>  \| <br> May 2017 </center>|
 
 
