@@ -30,6 +30,6 @@ permalink: /
   
 <br>
 
-**Email:** 2121026.rs[at]sist.ac.jp  
+**Email:** sauron.li@outlook.com 
 **LinkedIn:** [https://www.linkedin.com/in/xiaoran-li-713890193/](https://www.linkedin.com/in/xiaoran-li-713890193/)  
 **Github:** [https://github.com/SauronLee](https://github.com/SauronLee)
