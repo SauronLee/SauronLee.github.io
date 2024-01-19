@@ -7,9 +7,9 @@ nav_order: 4
 # Working
 
 
-|Position|Institution|Where and When|
-|----------|----------|:----------:|
-| **Elevator Maintenance** | Otis Elevator （China） Investment Co.,Ltd. | **<center>Hangzhou, China</center>**<center> Mar 2015 <br>  \| <br> May 2017 </center>|
+|Position| Institution   |                                    Where and When                                     |
+|----------|---------------|:-------------------------------------------------------------------------------------:|
+| **Artificial Intelligence R&D Engineer** | Hangzhou witsky technology co.,LTD  | **<center>Hangzhou, China</center>**<center> Mar 2023 <br>  \| <br> current </center> |
 
 
 # Teaching
